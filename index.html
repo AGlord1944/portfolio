@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Артем Озеров — Портфолио</title>
+  <!-- Подключаем ретро-шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Цветовая палитра Mid-Century Modern */
+    :root {
+      --bg-cream: #F4F1EA;
+      --mc-mustard: #DDA74F;
+      --mc-olive: #687259;
+      --mc-blue: #2A3D4F;
+      --mc-terracotta: #C36B58;
+      --text-dark: #222;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--mc-blue);
+    }
+
+    /* Геометрический фон */
+    .background-shapes {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(221, 167, 79, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(195, 107, 88, 0.1) 0%, transparent 20%);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Главный экран (Hero) */
+    .hero {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 100vh; padding: 100px 0; gap: 40px; flex-wrap: wrap;
+    }
+
+    .hero-text { flex: 1; min-width: 300px; }
+    .hero-text h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
+    .hero-text p { font-size: 1.2rem; color: var(--mc-olive); margin-bottom: 30px; line-height: 1.6; }
+
+    /* Блок с фотографиями */
+    .hero-images {
+      position: relative; flex: 1; min-width: 300px; height: 500px;
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    /* Ваше фото (стиль Арки) */
+    .photo-arch {
+      width: 280px; height: 400px; object-fit: cover;
+      border-radius: 140px 140px 0 0; /* Форма арки */
+      border: 6px solid var(--mc-mustard);
+      box-shadow: 15px 15px 0 var(--mc-blue); /* Характерная жесткая тень */
+      z-index: 2;
+    }
+
+    /* Фото герба (ретро-карточка) */
+    .photo-crest {
+      position: absolute; bottom: 20px; right: 10px;
+      width: 180px; height: 220px; object-fit: contain;
+      background-color: #fff; padding: 10px 10px 30px 10px; /* Рамка как у полароида */
+      box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+      transform: rotate(8deg); z-index: 3;
+      border: 1px solid #ddd;
+    }
+
+    /* Секция Обо мне */
+    .about, .portfolio { padding: 80px 0; }
+    .section-title { font-size: 2.5rem; margin-bottom: 40px; text-align: center; }
+    .about p { font-size: 1.1rem; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto; }
+
+    /* Портфолио (Сетка проектов) */
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+    }
+    .card {
+      background: #fff; padding: 30px; border-radius: 8px;
+      border-top: 8px solid var(--mc-terracotta);
+      box-shadow: 8px 8px 0 rgba(104, 114, 89, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 12px 12px 0 rgba(104, 114, 89, 0.4);
+    }
+    .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+    .card p { font-size: 0.95rem; line-height: 1.6; color: #555; }
+
+    /* Подвал и Соцсети */
+    footer {
+      background-color: var(--mc-blue); color: var(--bg-cream);
+      text-align: center; padding: 60px 20px; margin-top: 40px;
+    }
+    footer h2 { color: var(--mc-mustard); margin-bottom: 20px; }
+    
+    .social-links {
+      display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+    }
+    .social-links a {
+      text-decoration: none; color: var(--bg-cream); font-weight: 600;
+      padding: 12px 25px; border: 2px solid var(--mc-mustard); border-radius: 30px;
+      transition: all 0.3s;
+    }
+    .social-links a:hover {
+      background-color: var(--mc-mustard); color: var(--mc-blue);
+    }
+
+    /* Анимации при прокрутке */
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Адаптивность для телефонов */
+    @media (max-width: 768px) {
+      .hero-text h1 { font-size: 2.8rem; text-align: center; }
+      .hero-text p { text-align: center; }
+      .photo-crest { width: 140px; right: -10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-shapes"></div>
+
+  <div class="container">
+    <!-- Секция Hero -->
+    <section class="hero fade-in">
+      <div class="hero-text">
+        <h1 id="hero-name">Загрузка...</h1>
+        <p id="hero-title"></p>
+      </div>
+      <div class="hero-images">
+        <!-- ФАЙЛЫ КАРТИНОК ВСТАВЛЕНЫ ЗДЕСЬ -->
+        <img src="IMG_20250416_181001_992.jpg" alt="Артем Озеров" class="photo-arch">
+        <img src="6345054_original.jpg" alt="Герб" class="photo-crest">
+      </div>
+    </section>
+
+    <!-- Секция Обо мне -->
+    <section class="about fade-in">
+      <h2 class="section-title" id="about-title"></h2>
+      <p id="about-text"></p>
+    </section>
+
+    <!-- Секция Портфолио -->
+    <section class="portfolio fade-in">
+      <h2 class="section-title" id="projects-title"></h2>
+      <div class="grid" id="projects-grid">
+        <!-- Карточки сгенерируются скриптом -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Подвал (Контакты) -->
+  <footer class="fade-in">
+    <h2>Связаться со мной</h2>
+    <!-- РАБОЧИЕ ССЫЛКИ НА СОЦСЕТИ -->
+    <div class="social-links">
+      <a href="https://t.me/AGroLorDikk" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://vk.com/agrolordikk" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+      <a href="https://instagram.com/artom_g" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Загрузка текста из файла content.json
+    fetch('content.json')
+      .then(response => response.json())
+      .then(data => {
+        // Подставляем текст в HTML
+        document.getElementById('hero-name').textContent = data.name;
+        document.getElementById('hero-title').textContent = data.profession;
+        document.getElementById('about-title').textContent = data.about_title;
+        document.getElementById('about-text').textContent = data.about_text;
+        document.getElementById('projects-title').textContent = data.projects_title;
+
+        // Создаем карточки проектов
+        const grid = document.getElementById('projects-grid');
+        data.projects.forEach(project => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `<h3>${project.title}</h3><p>${project.desc}</p>`;
+          grid.appendChild(card);
+        });
+      })
+      .catch(error => {
+        document.getElementById('hero-name').textContent = "Артем Озеров";
+        document.getElementById('hero-title').textContent = "Сайт загружен, но файл content.json не найден. Убедитесь, что он лежит в папке.";
+        console.error('Ошибка загрузки JSON:', error);
+      });
+
+    // 2. Анимация появления элементов при прокрутке страницы
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>
