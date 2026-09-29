@@ -197,7 +197,9 @@
         data.projects.forEach((project, index) => {
           const card = document.createElement('div');
           card.className = 'card fade-in'; 
-          card.style.transitionDelay = `${index * 0.1s}`; 
+          
+          // ИСПРАВЛЕНА ОШИБКА ЗДЕСЬ (буква s теперь снаружи фигурных скобок)
+          card.style.transitionDelay = `${index * 0.1}s`; 
           
           // Проверяем, есть ли у проекта картинка
           const imageHtml = project.image ? `<img src="${project.image}" alt="${project.title}" class="card-image">` : '';
@@ -214,7 +216,7 @@
         });
       })
       .catch(error => {
-        document.getElementById('hero-name').textContent = "Артем Озеров";
+        document.getElementById('hero-name').textContent = "Ошибка загрузки";
         console.error('Ошибка:', error);
       });
 
